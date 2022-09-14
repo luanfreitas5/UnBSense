@@ -84,13 +84,14 @@ class ProcessamentoArquivos():
                 tweet_lake.to_pickle('{}datalake_part{}.pickle'.format(diretorioTweetsMerge, part + 1), protocol=pickle.HIGHEST_PROTOCOL)
             del tweet_lake
             
-    def limparDataset(self, periodo, grupo, diretorioTweetsMerge, diretorioTweetsMergeNormalizados):
+    def limparDataset(self, periodo, grupo, diretorioTweetsMergeNormalizados):
         
         """
         Etapa 3.2 Limpar arquivos
         unicode https://www.unicode.org/charts/PDF/
         """
         
+        diretorioTweetsMerge = getDiretorio(pastaTweetsMerge, periodo, grupo)
         pbar = tqdm.tqdm(range(1, self.parts + 1), colour='green')
         
         for part in pbar:

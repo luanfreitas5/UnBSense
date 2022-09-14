@@ -1,0 +1,16 @@
+tweepy==3.10.0
+snscrape
+pandas
+numpy
+tqdm
+unidecode
+nltk
+spacy
+matplotlib
+sklearn
+xlrd
+openpyxl
+seaborn
+matplotlib_venn
+wordcloud
+jupyter

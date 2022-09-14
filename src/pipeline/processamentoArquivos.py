@@ -29,7 +29,7 @@ class ProcessamentoArquivos():
         '''
         Constructor
         '''
-        self.parts = 10
+        self.parts = 100
             
     def mergeDatasets(self, periodo, grupo, diretorioTweetsMerge):
         '''

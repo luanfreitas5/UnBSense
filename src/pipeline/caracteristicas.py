@@ -115,6 +115,9 @@ class Caracteristicas(object):
                 return None         
     
     def extracaoCaracteristicas(self, periodo, grupo, diretorioCaracteristicas):
+        """
+        Etapa 4 Extrair Atributos
+        """
         
         diretorioTweetsMergeNormalizados = getDiretorio(pastaTweetsMergeNormalizados, periodo, grupo)
         
@@ -653,6 +656,9 @@ class Caracteristicas(object):
         return serieTemporal
     
     def remocaoOutliers(self, periodo, grupo, diretorioCaracteristicas):
+        """
+        Etapa 5 Qualidade de dados - remover outliers
+        """
         
         serieTemporal_volume_tweets = abrirBaseSerie(self.atributo_volume_tweets, diretorioCaracteristicas)
         

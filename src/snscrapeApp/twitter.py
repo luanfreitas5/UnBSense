@@ -40,7 +40,6 @@ class Twitter(object):
         stringBuscas = self.obterStringBusca(grupo)
         pbar = tqdm.tqdm(stringBuscas, colour='green')
         
-        
         for stringBusca in pbar:
             pbar.set_description(f"Buscando usuarios - {periodo} {grupo}")
             self.procurarCandidatos(stringBusca, periodo, grupo, diretorioCandidatos, since, until)
@@ -235,7 +234,7 @@ class Twitter(object):
         
         if grupo == 'controle':
             listaStringBusca = [f'-{string}' for string in listaStringBusca]
-            #listaStringBusca = [f'-depress{a}o {operador_or} -depressivo {operador_or} -depressiva {operador_or} -depr{e}']
+            # listaStringBusca = [f'-depress{a}o {operador_or} -depressivo {operador_or} -depressiva {operador_or} -depr{e}']
             return listaStringBusca
         elif grupo == 'depressao':
             return listaStringBusca

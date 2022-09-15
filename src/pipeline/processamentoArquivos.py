@@ -67,7 +67,7 @@ class ProcessamentoArquivos():
             except Exception as e:
                 print(e)
             try:
-                base.index = pd.to_datetime(base.index, infer_datetime_format=True, utc=True).tz_localize(None)
+                base.index = pd.to_datetime(base['created_at'], infer_datetime_format=True, utc=True).dt.tz_localize(None)
                 tweet_lake = base.sort_index().copy()
         
                 del base

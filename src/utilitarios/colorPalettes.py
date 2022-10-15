@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# coding: utf-8
+"""
+
+Author: Luan Freitas
+"""
+
 # "name = ['blue', 'green', 'red', 'maroon', 'yellow', 'cyan']
 # The yellowbrick default palette
 yellowbrick = ["#0272a2", "#9fc377", "#ca0b03", "#a50258", "#d7c703", "#88cada"]

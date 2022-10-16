@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
+"""
 
+Author: Luan Freitas
+"""
 import os, pickle
 import re
 import pandas as pd
@@ -14,15 +17,13 @@ import tqdm
 import sys
 
 
-class Caracteristicas(object):
-    '''
-    classdocs
-    '''
+class Caracteristicas():
+    """_summary_
+    """
 
     def __init__(self):
-        '''
-        Constructor
-        '''
+        """Constructor
+        """
         self.part = 100
         self.atributo_volume_tweets, self.atributo_volume_tweets_noite = 'volumeTweets', 'volumeTweetsNoite'
         self.atributo_indice_insonia, self.atributo_pronome_1_pessoa = 'indiceInsonia', 'pronome1Pessoa'
@@ -41,7 +42,108 @@ class Caracteristicas(object):
                                self.atributo_caracteres_orientais, self.atributo_emojis,
                                self.atributo_links, self.atributo_midia, self.atributo_curtidas]
         
-    def gerenciarCaracteristicas(self, df, caracteristica, listaNovosCandidatos, periodo='', grupo='', part=0, serieTemporal_volume_tweets={}):
+    def aplicar_extracao(self, df, listaNovosCandidatos, periodo, grupo, i, diretorioCaracteristicas):
+        """_summary_
+
+        Args:
+            df (_type_): _description_
+            listaNovosCandidatos (_type_): _description_
+            periodo (_type_): _description_
+            grupo (_type_): _description_
+            i (_type_): _description_
+            diretorioCaracteristicas (_type_): _description_
+        """
+        
+        serieTemporal_volume_tweets = self.gerenciarCaracteristicas(df, self.atributo_volume_tweets, listaNovosCandidatos, periodo, grupo, i)
+        if serieTemporal_volume_tweets:
+            atualizarBaseSerie(serieTemporal_volume_tweets, self.atributo_volume_tweets, diretorioCaracteristicas)
+        
+        serieTemporal_indice_insonia = self.gerenciarCaracteristicas(df, self.atributo_indice_insonia, listaNovosCandidatos, periodo, grupo, i, serieTemporal_volume_tweets)
+        if serieTemporal_indice_insonia:
+            atualizarBaseSerie(serieTemporal_indice_insonia, self.atributo_indice_insonia, diretorioCaracteristicas)
+        del serieTemporal_volume_tweets
+        del serieTemporal_indice_insonia
+        
+        serieTemporal_pronome_1_pessoa = self.gerenciarCaracteristicas(df, self.atributo_pronome_1_pessoa, listaNovosCandidatos, periodo, grupo, i)
+        if serieTemporal_pronome_1_pessoa:
+            atualizarBaseSerie(serieTemporal_pronome_1_pessoa, self.atributo_pronome_1_pessoa, diretorioCaracteristicas)
+        del serieTemporal_pronome_1_pessoa
+        
+        serieTemporal_pronome_2_pessoa = self.gerenciarCaracteristicas(df, self.atributo_pronome_2_pessoa, listaNovosCandidatos, periodo, grupo, i)
+        if serieTemporal_pronome_2_pessoa:
+            atualizarBaseSerie(serieTemporal_pronome_2_pessoa, self.atributo_pronome_2_pessoa, diretorioCaracteristicas)
+        del serieTemporal_pronome_2_pessoa
+        
+        serieTemporal_pronome_3_pessoa = self.gerenciarCaracteristicas(df, self.atributo_pronome_3_pessoa, listaNovosCandidatos, periodo, grupo, i)
+        if serieTemporal_pronome_3_pessoa:
+            atualizarBaseSerie(serieTemporal_pronome_3_pessoa, self.atributo_pronome_3_pessoa, diretorioCaracteristicas)
+        del serieTemporal_pronome_3_pessoa
+        
+        serieTemporal_caracteres_orientais = self.gerenciarCaracteristicas(df, self.atributo_caracteres_orientais, listaNovosCandidatos, periodo, grupo, i)
+        if serieTemporal_caracteres_orientais:
+            atualizarBaseSerie(serieTemporal_caracteres_orientais, self.atributo_caracteres_orientais, diretorioCaracteristicas)
+        del serieTemporal_caracteres_orientais
+        
+        serieTemporal_emojis = self.gerenciarCaracteristicas(df, self.atributo_emojis, listaNovosCandidatos, periodo, grupo, i)
+        if serieTemporal_emojis:
+            atualizarBaseSerie(serieTemporal_emojis, self.atributo_emojis, diretorioCaracteristicas)
+        del serieTemporal_emojis
+        
+        serieTemporal_curtidas = self.gerenciarCaracteristicas(df, self.atributo_curtidas, listaNovosCandidatos, periodo, grupo, i)
+        if serieTemporal_curtidas:
+            atualizarBaseSerie(serieTemporal_curtidas, self.atributo_curtidas, diretorioCaracteristicas)
+        del serieTemporal_curtidas
+        
+        serieTemporal_midia = self.gerenciarCaracteristicas(df, self.atributo_midia, listaNovosCandidatos, periodo, grupo, i)
+        if serieTemporal_midia:
+            atualizarBaseSerie(serieTemporal_midia, self.atributo_midia, diretorioCaracteristicas)
+        del serieTemporal_midia
+        
+        serieTemporal_links = self.gerenciarCaracteristicas(df, self.atributo_links, listaNovosCandidatos, periodo, grupo, i)
+        if serieTemporal_links:
+            atualizarBaseSerie(serieTemporal_links, self.atributo_links, diretorioCaracteristicas)
+        del serieTemporal_links
+        
+        serieTemporal_grafo_social = self.gerenciarCaracteristicas(df, self.atributo_grafo_social, listaNovosCandidatos, periodo, grupo, i)
+        if serieTemporal_grafo_social:
+            atualizarBaseSerie(serieTemporal_grafo_social, self.atributo_grafo_social, diretorioCaracteristicas)
+        del serieTemporal_grafo_social
+        
+        serieTemporal_medicamentos_anti_depressivo = self.gerenciarCaracteristicas(df, self.atributo_medicamentos_anti_depressivo, listaNovosCandidatos, periodo, grupo, i)
+        if serieTemporal_medicamentos_anti_depressivo:
+            atualizarBaseSerie(serieTemporal_medicamentos_anti_depressivo, self.atributo_medicamentos_anti_depressivo, diretorioCaracteristicas)
+        del serieTemporal_medicamentos_anti_depressivo
+        
+        serieTemporal_termos_depressivos = self.gerenciarCaracteristicas(df, self.atributo_termos_depressivos, listaNovosCandidatos, periodo, grupo, i)
+        if serieTemporal_termos_depressivos:
+            atualizarBaseSerie(serieTemporal_termos_depressivos, self.atributo_termos_depressivos, diretorioCaracteristicas)
+        del serieTemporal_termos_depressivos
+        
+        serieTemporal_ativacao = self.gerenciarCaracteristicas(df, self.atributo_ativacao, listaNovosCandidatos, periodo, grupo, i)
+        if serieTemporal_ativacao:
+            atualizarBaseSerie(serieTemporal_ativacao, self.atributo_ativacao, diretorioCaracteristicas)
+        del serieTemporal_ativacao
+        
+        serieTemporal_valencia = self.gerenciarCaracteristicas(df, self.atributo_valencia, listaNovosCandidatos, periodo, grupo, i)
+        if serieTemporal_valencia:
+            atualizarBaseSerie(serieTemporal_valencia, self.atributo_valencia, diretorioCaracteristicas)
+        del serieTemporal_valencia
+        
+    def gerenciar_caracteristicas(self, df, caracteristica, listaNovosCandidatos, periodo='', grupo='', part=0, serieTemporal_volume_tweets={}) -> dict:
+        """_summary_
+
+        Args:
+            df (pd.DataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str, optional): _description_. Defaults to ''.
+            grupo (str, optional): _description_. Defaults to ''.
+            part (int, optional): _description_. Defaults to 0.
+            serieTemporal_volume_tweets (dict, optional): _description_. Defaults to pd.Series().
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
         
         if caracteristica == self.atributo_volume_tweets:
@@ -98,27 +200,52 @@ class Caracteristicas(object):
         
         return serieTemporal
     
-    def setMedia(self, df):
-        for dicionario in df['media']:
+    def setMedia(self, df) -> list:
+        """_summary_
+
+        Args:
+            df (pd.DataFrame): _description_
+
+        Returns:
+            list: _description_
+        """
+        lista = df['media'].to_list()
+        midia = [] 
+        for dicionario in lista:
             if dicionario:
-                for media in dicionario:
-                    return media['fullUrl']
+                for fotosVideoGif in dicionario:
+                    midia.append(fotosVideoGif['fullUrl'])
             else:
-                return None 
+                midia.append(None) 
+        return midia
             
-    def setLinks(self, df):
-        for lista in df['links']:
-            if lista:
-                for link in lista:
-                    return link
+    def setLinks(self, df) -> list:
+        """_summary_
+
+        Args:
+            df (pd.DataFrame): _description_
+
+        Returns:
+            list: _description_
+        """
+        lista = df['links'].to_list()
+        links = [] 
+        for dicionario in lista:
+            if dicionario:
+                for link in dicionario:
+                    links.append(link)
             else:
-                return None         
+                links.append(None)   
+        return links   
     
     def extracaoCaracteristicas(self, periodo, grupo, diretorioCaracteristicas):
+        """Etapa 4 Extrair Atributos
+
+        Args:
+            periodo (str): _description_
+            grupo (str): _description_
+            diretorioCaracteristicas (str): _description_
         """
-        Etapa 4 Extrair Atributos
-        """
-        
         diretorioTweetsMergeNormalizados = getDiretorio(pastaTweetsMergeNormalizados, periodo, grupo)
         
         usecols = ['screen_name', 'full_text', 'full_text_original',
@@ -135,7 +262,6 @@ class Caracteristicas(object):
         listaArquivosMerge = [fname for fname in os.listdir(diretorioTweetsMergeNormalizados) if 'processed_datalake_part' in fname]
         
         for i, part in enumerate(listaArquivosMerge, 1):
-            # print(f"Processando arquivo {periodo} --- {grupo} parte {i+1}")
             
             df = pd.read_pickle(f'{diretorioTweetsMergeNormalizados}{part}')[usecols]
             df['screen_name'] = df['screen_name'].astype(str)
@@ -152,7 +278,7 @@ class Caracteristicas(object):
                 # Cria uma lista de candidatos não extraido as 15 caracteristicas
                 listaNovosCandidatos = list(set(df['screen_name'].to_list()))
                 listaNovosCandidatos.sort()
-                
+
                 serieTemporal_volume_tweets = self.gerenciarCaracteristicas(df, self.atributo_volume_tweets, listaNovosCandidatos, periodo, grupo, i)
                 if serieTemporal_volume_tweets:
                     atualizarBaseSerie(serieTemporal_volume_tweets, self.atributo_volume_tweets, diretorioCaracteristicas)
@@ -230,8 +356,19 @@ class Caracteristicas(object):
                 
                 del df
                 
-    def criarSerieTemporal(self, df, candidato, caracteristica, expressaoRegular='', baseAnewBR={}):
-        
+    def criarSerieTemporal(self, df, candidato, caracteristica, expressaoRegular='', baseAnewBR={}) -> pd.Series:
+        """_summary_
+
+        Args:
+            df (pd.dataFrame): _description_
+            candidato (str): _description_
+            caracteristica (str): _description_
+            expressaoRegular (str, optional): _description_. Defaults to ''.
+            baseAnewBR (dict, optional): _description_. Defaults to {}.
+
+        Returns:
+            pd.Series: _description_
+        """
         serieTemporal = pd.Series()
         
         if caracteristica in [self.atributo_volume_tweets, self.atributo_volume_tweets_noite]:
@@ -283,10 +420,20 @@ class Caracteristicas(object):
 
         return serieTemporal
 
-    def extrairVolumeTweets(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part):
-        '''
-        Extração da Caracteristica 1 - Volume de Tweets
-        '''
+    def extrairVolumeTweets(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -> dict:
+        """Extração da Caracteristica 1 - Volume de Tweets
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str): _description_
+            grupo (str): _description_
+            part (int): _description_
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
         
         if listaNovosCandidatos:
@@ -301,9 +448,19 @@ class Caracteristicas(object):
                 
         return serieTemporal
     
-    def extrairVolumeTweetsNoite(self, df, caracteristica, listaNovosCandidatos):
+    def extrairVolumeTweetsNoite(self, df, caracteristica, listaNovosCandidatos) -> dict:
+        """Extração da Caracteristica 2 - Indice de Insonia (Parte 1) Volume de Tweets durante o turno da noite 22:00 - 6:00
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+
+        Returns:
+            dict: _description_
+        """
         '''
-        Extração da Caracteristica 2 - Indice de Insonia (Parte 1) Volume de Tweets durante o turno da noite 22:00 - 6:00
+        
         '''
         serieTemporal = {}
         
@@ -322,10 +479,20 @@ class Caracteristicas(object):
                 
         return serieTemporal
     
-    def extrairIndiceInsomia(self, df, listaNovosCandidatos, serieTemporal_volume_tweets, periodo, grupo, part):
-        '''
-        Extração da Caracteristica 2 - Indice de Insonia (Parte 2) Relação de Volume de Tweets durante o turno da noite 22:00 - 6:00
-        '''
+    def extrairIndiceInsomia(self, df, listaNovosCandidatos, serieTemporal_volume_tweets, periodo, grupo, part) -> dict:
+        """Extração da Caracteristica 2 - Indice de Insonia (Parte 2) Relação de Volume de Tweets durante o turno da noite 22:00 - 6:00
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str): _description_
+            grupo (str): _description_
+            part (int): _description_
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
         
         if listaNovosCandidatos:
@@ -342,13 +509,21 @@ class Caracteristicas(object):
                 serieTemporal[candidato] = tratarValoresAusentes(serieTemporal[candidato])
         return serieTemporal
     
-    def extrairPronome1Pessoa(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part):
-        '''
-        Extração da Caracteristica 3 - Estilo Linguistico de Pronome de 1ª Pessoa
-        '''
+    def extrairPronome1Pessoa(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -> dict:
+        """Extração da Caracteristica 3 - Estilo Linguistico de Pronome de 1ª Pessoa
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str): _description_
+            grupo (str): _description_
+            part (int): _description_
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
-        
-        # listaNovosCandidatos = getListaNovosCandidatos(caracteristica, listaNovosCandidatos, diretorioCaracteristicas)
         
         if listaNovosCandidatos:
             pronomes1pessoa = ['eu', 'nos']
@@ -368,13 +543,21 @@ class Caracteristicas(object):
                 
         return serieTemporal
     
-    def extrairPronome2Pessoa(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part):
-        '''
-        Extração da Caracteristica 4 - Estilo Linguistico de Pronome de 2ª Pessoa
-        '''
+    def extrairPronome2Pessoa(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -> dict:
+        """Extração da Caracteristica 4 - Estilo Linguistico de Pronome de 2ª Pessoa
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str): _description_
+            grupo (str): _description_
+            part (int): _description_
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
-        
-        # listaNovosCandidatos = getListaNovosCandidatos(caracteristica, listaNovosCandidatos, diretorioCaracteristicas)
         
         if listaNovosCandidatos:
             
@@ -395,13 +578,21 @@ class Caracteristicas(object):
                 
         return serieTemporal
     
-    def extrairPronome3Pessoa(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part):
-        '''
-        Extração da Caracteristica 5 - Estilo Linguistico de Pronome de 3ª Pessoa
-        '''
+    def extrairPronome3Pessoa(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -> dict:
+        """Extração da Caracteristica 5 - Estilo Linguistico de Pronome de 3ª Pessoa
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str): _description_
+            grupo (str): _description_
+            part (int): _description_
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
-        
-        # listaNovosCandidatos = getListaNovosCandidatos(caracteristica, listaNovosCandidatos, diretorioCaracteristicas)
         
         if listaNovosCandidatos:
             
@@ -422,13 +613,21 @@ class Caracteristicas(object):
                 
         return serieTemporal
         
-    def extrairTermosDepressivos(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part):
-        '''
-        Extração da Caracteristica 8 - Termos de Depressão
-        '''
+    def extrairTermosDepressivos(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -> dict:
+        """Extração da Caracteristica 8 - Termos de Depressão
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str): _description_
+            grupo (str): _description_
+            part (int): _description_
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
-        
-        # listaNovosCandidatos = getListaNovosCandidatos(caracteristica, listaNovosCandidatos, diretorioCaracteristicas)
         
         if listaNovosCandidatos:
             
@@ -455,13 +654,21 @@ class Caracteristicas(object):
                 
         return serieTemporal
     
-    def extrairMedicamentosAntiDepressivos(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part):
-        '''
-        Extração da Caracteristica 9 - Medicamentos Anti-Depressivos
-        '''
+    def extrairMedicamentosAntiDepressivos(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -> dict:
+        """Extração da Caracteristica 10 - Medicamentos Anti-Depressivos
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str): _description_
+            grupo (str): _description_
+            part (int): _description_
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
-        
-        # listaNovosCandidatos = getListaNovosCandidatos(caracteristica, listaNovosCandidatos, diretorioCaracteristicas)
         
         if listaNovosCandidatos:
             baseMedicamentosAntiDepressivos = carregarBaseMedicamentosAntiDepressivos()
@@ -487,13 +694,21 @@ class Caracteristicas(object):
                     
         return serieTemporal
     
-    def extrairCaracteresOrientais(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part):
-        '''
-        Extração da Caracteristica 11 - Caracteres Orientais Japônes, Chinês e Coreano
-        '''
+    def extrairCaracteresOrientais(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -> dict:
+        """Extração da Caracteristica 11 - Caracteres Orientais Japônes, Chinês e Coreano
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str): _description_
+            grupo (str): _description_
+            part (int): _description_
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
-        
-        # listaNovosCandidatos = getListaNovosCandidatos(caracteristica, listaNovosCandidatos, diretorioCaracteristicas)
         
         if listaNovosCandidatos:
             # https://medium.com/the-artificial-impostor/detecting-chinese-characters-in-unicode-strings-4ac839ba313a
@@ -512,10 +727,20 @@ class Caracteristicas(object):
                 
         return serieTemporal
     
-    def extrairEmojis(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part):
-        '''
-        Extração da Caracteristica 12 - Emojis
-        '''
+    def extrairEmojis(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -> dict:
+        """Extração da Caracteristica 12 - Emojis
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str): _description_
+            grupo (str): _description_
+            part (int): _description_
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
         
         if listaNovosCandidatos:
@@ -531,13 +756,21 @@ class Caracteristicas(object):
                 
         return serieTemporal
     
-    def extrairCurtidas(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part):
-        '''
-        Extração da Caracteristica 15 - Numero de Curtidas
-        '''
+    def extrairCurtidas(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -> dict:
+        """Extração da Caracteristica 15 - Numero de Curtidas
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str): _description_
+            grupo (str): _description_
+            part (int): _description_
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
-        
-        # listaNovosCandidatos = getListaNovosCandidatos(caracteristica, listaNovosCandidatos, diretorioCaracteristicas)
         
         if listaNovosCandidatos:
             pbar = tqdm.tqdm(listaNovosCandidatos, colour='green')
@@ -550,14 +783,22 @@ class Caracteristicas(object):
                 
         return serieTemporal
     
-    def extrairMidia(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part):
-        '''
-        Extração da Caracteristica 14 - Midia (fotos, videos e gifs)
-        '''
+    def extrairMidia(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -> dict:
+        """Extração da Caracteristica 14 - Midia (fotos, videos e gifs)
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str): _description_
+            grupo (str): _description_
+            part (int): _description_
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
         
-        # listaNovosCandidatos = getListaNovosCandidatos(caracteristica, listaNovosCandidatos, diretorioCaracteristicas)
-      
         if listaNovosCandidatos:
             pbar = tqdm.tqdm(listaNovosCandidatos, colour='green')
             for candidato in pbar:
@@ -569,14 +810,22 @@ class Caracteristicas(object):
                 
         return serieTemporal
     
-    def extrairLinks(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part):
-        '''
-        Extração da Caracteristica 13 - Frequência de Links
-        '''
+    def extrairLinks(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -> dict:
+        """Extração da Caracteristica 13 - Frequência de Links
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str): _description_
+            grupo (str): _description_
+            part (int): _description_
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
         
-        # listaNovosCandidatos = getListaNovosCandidatos(caracteristica, listaNovosCandidatos, diretorioCaracteristicas)
-      
         if listaNovosCandidatos:
             pbar = tqdm.tqdm(listaNovosCandidatos, colour='green')
             for candidato in pbar:
@@ -588,14 +837,22 @@ class Caracteristicas(object):
                 
         return serieTemporal
     
-    def extrairGrafoSocial(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part):
-        '''
-        Extração da Caracteristica 10 - grafo social
-        '''
+    def extrairGrafoSocial(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -> dict:
+        """Extração da Caracteristica 9 - grafo social
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str): _description_
+            grupo (str): _description_
+            part (int): _description_
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
         
-        # listaNovosCandidatos = getListaNovosCandidatos(caracteristica, listaNovosCandidatos, diretorioCaracteristicas)
-  
         if listaNovosCandidatos:
             pbar = tqdm.tqdm(listaNovosCandidatos, colour='green')
             for candidato in pbar:
@@ -608,13 +865,20 @@ class Caracteristicas(object):
         return serieTemporal
     
     def extrairValencia(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -> dict:
-                
-        '''
-        Extração da Caracteristica 6 - Emoção Valencia
-        '''
+        """Extração da Caracteristica 6 - Emoção Valencia
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str): _description_
+            grupo (str): _description_
+            part (int): _description_
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
-        
-        # listaNovosCandidatos = getListaNovosCandidatos(caracteristica, listaNovosCandidatos, diretorioCaracteristicas)
         
         if listaNovosCandidatos:
             baseAnewBR = carregarBaseAnewBR().T.to_dict()
@@ -632,13 +896,20 @@ class Caracteristicas(object):
         return serieTemporal
     
     def extrairAtivacao(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -> dict:
-                
-        '''
-        Extração da Caracteristica 7 - Emoção Ativacao
-        '''
+        """Extração da Caracteristica 7 - Emoção Ativacao
+
+        Args:
+            df (pd.dataFrame): _description_
+            caracteristica (str): _description_
+            listaNovosCandidatos (list): _description_
+            periodo (str): _description_
+            grupo (str): _description_
+            part (int): _description_
+
+        Returns:
+            dict: _description_
+        """
         serieTemporal = {}
-        
-        # listaNovosCandidatos = getListaNovosCandidatos(caracteristica, listaNovosCandidatos, diretorioCaracteristicas)
         
         if listaNovosCandidatos:
             baseAnewBR = carregarBaseAnewBR().T.to_dict()
@@ -656,10 +927,13 @@ class Caracteristicas(object):
         return serieTemporal
     
     def remocaoOutliers(self, periodo, grupo, diretorioCaracteristicas):
+        """Etapa 5 Qualidade de dados - remover outliers
+
+        Args:
+            periodo (str): _description_
+            grupo (str): _description_
+            diretorioCaracteristicas (str): _description_
         """
-        Etapa 5 Qualidade de dados - remover outliers
-        """
-        
         serieTemporal_volume_tweets = abrirBaseSerie(self.atributo_volume_tweets, diretorioCaracteristicas)
         
         if not os.path.exists(f'{diretorioCaracteristicas}outliers.pickle'):

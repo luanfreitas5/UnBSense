@@ -21,6 +21,7 @@ pastaTweetsMerge = 'tweets_merge'
 pastaTweetsMergeNormalizados = 'tweets_merge_normalizados'
 pastaCaracteristicas = 'caracteristicas'
 
+
 def is_any_thread_alive(threads):
     """_summary_
 
@@ -31,6 +32,7 @@ def is_any_thread_alive(threads):
         _type_: _description_
     """
     return True in [t.is_alive() for t in threads]
+
 
 def start_threads(listaThreads):
     """_summary_

@@ -321,8 +321,6 @@ class Etapa_3_Arquivos():
             
             tweet_lake.drop(list(tweet_lake.loc[[True if '' == text else False for text in tweet_lake.full_text.values]].index), inplace=True, errors='ignore')
             
-            
-            
             if part in range(1, 10):
                 tweet_lake.to_pickle('{}processed_datalake_part00{}.pickle'.format(diretorioTweetsMergeNormalizados, part), protocol=pickle.HIGHEST_PROTOCOL)
             elif part in range(10, 100):
@@ -330,13 +328,6 @@ class Etapa_3_Arquivos():
             else:
                 tweet_lake.to_pickle('{}processed_datalake_part{}.pickle'.format(diretorioTweetsMergeNormalizados, part), protocol=pickle.HIGHEST_PROTOCOL)
                 
-            '''if part in range(1, 10):
-                tweet_lake.to_pickle('{}processed_datalake_part00{}.pickle'.format('', part), protocol=pickle.HIGHEST_PROTOCOL)
-            elif part in range(10, 100):
-                tweet_lake.to_pickle('{}processed_datalake_part0{}.pickle'.format(diretorioTweetsMergeNormalizados, part), protocol=pickle.HIGHEST_PROTOCOL)
-            else:
-                tweet_lake.to_pickle('{}processed_datalake_part{}.pickle'.format(diretorioTweetsMergeNormalizados, part), protocol=pickle.HIGHEST_PROTOCOL)'''
-            
     def remover_palavras_frequentes(self, string):
         lista = ['deus', 'vida', 'mundo', 'mano', 'semana', 'video', 'brasil', 'amigo', 'merda', 'porra', 
                  'caralho', 'amanha', 'vontade', 'gosto', 'gostei', 'feliz', 'mae', 'cu', 'linda']

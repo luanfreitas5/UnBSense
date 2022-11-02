@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module caracteristicas</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>caracteristicas</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:d%3A%5Cjava%5Cworkspace_python%5Cunbsense%5Csrc%5Cpipeline%5Ccaracteristicas.py">d:\java\workspace_python\unbsense\src\pipeline\caracteristicas.py</a></font></td></tr></table>
+    <p><tt>Author:&nbsp;Luan&nbsp;Freitas</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="os.html">os</a><br>
+<a href="pandas.html">pandas</a><br>
+</td><td width="25%" valign=top><a href="pickle.html">pickle</a><br>
+<a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+<a href="tqdm.html">tqdm</a><br>
+</td><td width="25%" valign=top><a href="unidecode.html">unidecode</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="caracteristicas.html#Caracteristicas">Caracteristicas</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Caracteristicas">class <strong>Caracteristicas</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>_summary_<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Caracteristicas-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Constructor</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-criarSerieTemporal"><strong>criarSerieTemporal</strong></a>(self, df, candidato, caracteristica, expressaoRegular='', baseAnewBR={}) -&gt; pandas.core.series.Series</dt><dd><tt>_summary_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;candidato&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;expressaoRegular&nbsp;(str,&nbsp;optional):&nbsp;_description_.&nbsp;Defaults&nbsp;to&nbsp;''.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;baseAnewBR&nbsp;(dict,&nbsp;optional):&nbsp;_description_.&nbsp;Defaults&nbsp;to&nbsp;{}.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pd.Series:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extracaoCaracteristicas"><strong>extracaoCaracteristicas</strong></a>(self, periodo, grupo, diretorioCaracteristicas)</dt><dd><tt>Etapa&nbsp;4&nbsp;Extrair&nbsp;Atributos<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;diretorioCaracteristicas&nbsp;(str):&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairAtivacao"><strong>extrairAtivacao</strong></a>(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;7&nbsp;-&nbsp;Emoção&nbsp;Ativacao<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairCaracteresOrientais"><strong>extrairCaracteresOrientais</strong></a>(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;11&nbsp;-&nbsp;Caracteres&nbsp;Orientais&nbsp;Japônes,&nbsp;Chinês&nbsp;e&nbsp;Coreano<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairCurtidas"><strong>extrairCurtidas</strong></a>(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;15&nbsp;-&nbsp;Numero&nbsp;de&nbsp;Curtidas<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairEmojis"><strong>extrairEmojis</strong></a>(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;12&nbsp;-&nbsp;Emojis<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairGrafoSocial"><strong>extrairGrafoSocial</strong></a>(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;9&nbsp;-&nbsp;grafo&nbsp;social<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairIndiceInsomia"><strong>extrairIndiceInsomia</strong></a>(self, df, listaNovosCandidatos, serieTemporal_volume_tweets, periodo, grupo, part) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;2&nbsp;-&nbsp;Indice&nbsp;de&nbsp;Insonia&nbsp;(Parte&nbsp;2)&nbsp;Relação&nbsp;de&nbsp;Volume&nbsp;de&nbsp;Tweets&nbsp;durante&nbsp;o&nbsp;turno&nbsp;da&nbsp;noite&nbsp;22:00&nbsp;-&nbsp;6:00<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairLinks"><strong>extrairLinks</strong></a>(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;13&nbsp;-&nbsp;Frequência&nbsp;de&nbsp;Links<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairMedicamentosAntiDepressivos"><strong>extrairMedicamentosAntiDepressivos</strong></a>(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;10&nbsp;-&nbsp;Medicamentos&nbsp;Anti-Depressivos<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairMidia"><strong>extrairMidia</strong></a>(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;14&nbsp;-&nbsp;Midia&nbsp;(fotos,&nbsp;videos&nbsp;e&nbsp;gifs)<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairPronome1Pessoa"><strong>extrairPronome1Pessoa</strong></a>(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;3&nbsp;-&nbsp;Estilo&nbsp;Linguistico&nbsp;de&nbsp;Pronome&nbsp;de&nbsp;1ª&nbsp;Pessoa<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairPronome2Pessoa"><strong>extrairPronome2Pessoa</strong></a>(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;4&nbsp;-&nbsp;Estilo&nbsp;Linguistico&nbsp;de&nbsp;Pronome&nbsp;de&nbsp;2ª&nbsp;Pessoa<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairPronome3Pessoa"><strong>extrairPronome3Pessoa</strong></a>(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;5&nbsp;-&nbsp;Estilo&nbsp;Linguistico&nbsp;de&nbsp;Pronome&nbsp;de&nbsp;3ª&nbsp;Pessoa<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairTermosDepressivos"><strong>extrairTermosDepressivos</strong></a>(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;8&nbsp;-&nbsp;Termos&nbsp;de&nbsp;Depressão<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairValencia"><strong>extrairValencia</strong></a>(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;6&nbsp;-&nbsp;Emoção&nbsp;Valencia<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairVolumeTweets"><strong>extrairVolumeTweets</strong></a>(self, df, caracteristica, listaNovosCandidatos, periodo, grupo, part) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;1&nbsp;-&nbsp;Volume&nbsp;de&nbsp;Tweets<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-extrairVolumeTweetsNoite"><strong>extrairVolumeTweetsNoite</strong></a>(self, df, caracteristica, listaNovosCandidatos) -&gt; dict</dt><dd><tt>Extração&nbsp;da&nbsp;Caracteristica&nbsp;2&nbsp;-&nbsp;Indice&nbsp;de&nbsp;Insonia&nbsp;(Parte&nbsp;1)&nbsp;Volume&nbsp;de&nbsp;Tweets&nbsp;durante&nbsp;o&nbsp;turno&nbsp;da&nbsp;noite&nbsp;22:00&nbsp;-&nbsp;6:00<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.dataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-gerenciarCaracteristicas"><strong>gerenciarCaracteristicas</strong></a>(self, df, caracteristica, listaNovosCandidatos, periodo='', grupo='', part=0, serieTemporal_volume_tweets={}) -&gt; dict</dt><dd><tt>_summary_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.DataFrame):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;caracteristica&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;listaNovosCandidatos&nbsp;(list):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str,&nbsp;optional):&nbsp;_description_.&nbsp;Defaults&nbsp;to&nbsp;''.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str,&nbsp;optional):&nbsp;_description_.&nbsp;Defaults&nbsp;to&nbsp;''.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;part&nbsp;(int,&nbsp;optional):&nbsp;_description_.&nbsp;Defaults&nbsp;to&nbsp;0.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;serieTemporal_volume_tweets&nbsp;(dict,&nbsp;optional):&nbsp;_description_.&nbsp;Defaults&nbsp;to&nbsp;pd.Series().<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-remocaoOutliers"><strong>remocaoOutliers</strong></a>(self, periodo, grupo, diretorioCaracteristicas)</dt><dd><tt>Etapa&nbsp;5&nbsp;Qualidade&nbsp;de&nbsp;dados&nbsp;-&nbsp;remover&nbsp;outliers<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;periodo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;grupo&nbsp;(str):&nbsp;_description_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;diretorioCaracteristicas&nbsp;(str):&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-setLinks"><strong>setLinks</strong></a>(self, df) -&gt; list</dt><dd><tt>_summary_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.DataFrame):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;list:&nbsp;_description_</tt></dd></dl>
+
+<dl><dt><a name="Caracteristicas-setMedia"><strong>setMedia</strong></a>(self, df) -&gt; list</dt><dd><tt>_summary_<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;df&nbsp;(pd.DataFrame):&nbsp;_description_<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;list:&nbsp;_description_</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>pastaTweetsMergeNormalizados</strong> = 'tweets_merge_normalizados'</td></tr></table>
+</body></html>

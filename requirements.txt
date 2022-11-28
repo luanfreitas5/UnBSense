@@ -7,7 +7,7 @@ unidecode
 nltk
 spacy
 matplotlib
-sklearn
+scikit-learn
 xlrd
 openpyxl
 seaborn

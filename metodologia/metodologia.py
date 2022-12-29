@@ -100,12 +100,6 @@ class Metodologia(object):
             for grupo in listaGrupos:
                 diretorioTweetsMergeNormalizados = getDiretorio(pastaTweetsMergeNormalizados, periodo, grupo)
                 pipeline.etapa_3_2_limparDatasets(periodo, grupo, diretorioTweetsMergeNormalizados)
-                
-        
-        for periodo in listaPeriodos:
-            for grupo in listaGrupos:
-                diretorioTweetsMergeNormalizados = f'datasets/{periodo}/tweets_merge_normalizados_sem_palavras_repetidas/{grupo}/'
-                pipeline.parte2(periodo, grupo, diretorioTweetsMergeNormalizados)
             
     def etapa_4_extrair_caracteristicas(self, listaPeriodos, listaGrupos):
         """_summary_
@@ -123,14 +117,6 @@ class Metodologia(object):
                 diretorioCaracteristicas = getDiretorio(pastaCaracteristicas, periodo, grupo)
                 pipeline.etapa_4_extracaoCaracteristicas(periodo, grupo, diretorioCaracteristicas, diretorioTweetsMergeNormalizados)
                 
-        for periodo in listaPeriodos:
-            for grupo in listaGrupos:
-                diretorioTweetsMergeNormalizados = f'datasets/{periodo}/tweets_merge_normalizados_sem_palavras_repetidas/{grupo}/'
-                diretorioCaracteristicas = f'datasets/{periodo}/caracteristicas_sem_palavras_repetidas/{grupo}/'
-                if not os.path.exists(diretorioCaracteristicas):
-                    os.makedirs(diretorioCaracteristicas)
-                pipeline.etapa_4_extracaoCaracteristicas(periodo, grupo, diretorioCaracteristicas, diretorioTweetsMergeNormalizados)
-                
     def etapa_5_qualidade_Dados(self, listaPeriodos, listaGrupos):
         """_summary_
 
@@ -146,14 +132,6 @@ class Metodologia(object):
                 diretorioCaracteristicas = getDiretorio(pastaCaracteristicas, periodo, grupo)
                 pipeline.etapa_5_remocaoOutliers(periodo, grupo, diretorioCaracteristicas)
                 
-        
-        for periodo in listaPeriodos:
-            for grupo in listaGrupos:
-                diretorioCaracteristicas = f'datasets/{periodo}/caracteristicas_sem_palavras_repetidas/{grupo}/'
-                if not os.path.exists(diretorioCaracteristicas):
-                    os.makedirs(diretorioCaracteristicas)
-                pipeline.etapa_5_remocaoOutliers(periodo, grupo, diretorioCaracteristicas)
-                
     def etapa_6_vetores_caracteristicas(self, listaPeriodos, listaGrupos):
         """_summary_
 
@@ -167,11 +145,6 @@ class Metodologia(object):
         for periodo in listaPeriodos:
             for grupo in listaGrupos:
                 diretorioCaracteristicas = getDiretorio(pastaCaracteristicas, periodo, grupo)
-                pipeline.etapa_6_VetoresCaracteristicas(periodo, grupo, diretorioCaracteristicas)
-        
-        for periodo in listaPeriodos:
-            for grupo in listaGrupos:
-                diretorioCaracteristicas = f'datasets/{periodo}/caracteristicas_sem_palavras_repetidas/{grupo}/'
                 pipeline.etapa_6_VetoresCaracteristicas(periodo, grupo, diretorioCaracteristicas)
             
     def etapa_7_criar_base_dados(self, listaPeriodos):
@@ -220,6 +193,7 @@ class Metodologia(object):
                 
                 thread = Thread(target=nuvemPalavras.criarBaseDadosTexto, args=(candidatosBusca, f'twitterTextos_candidatos_{grupo}_{periodo}.csv', 'datasets/basesDadosTexto/'), daemon=True)
                 listaThreads.append(thread)
+                
         for thread in listaThreads:
             thread.start()
         for thread in listaThreads:
